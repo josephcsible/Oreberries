@@ -1,14 +1,14 @@
 [
 {
-  "modid": "examplemod",
-  "name": "Example Mod",
-  "description": "Example placeholder mod.",
+  "modid": "Oreberries",
+  "name": "Oreberries",
+  "description": "Bring back a configurable version of 1.7.10 Tinkers' Construct oreberries",
   "version": "${version}",
   "mcversion": "${mcversion}",
-  "url": "",
+  "url": "https://minecraft.curseforge.com/projects/oreberries",
   "updateUrl": "",
-  "authorList": ["ExampleDude"],
-  "credits": "The Forge and FML guys, for making this example",
+  "authorList": ["Joseph C. Sible"],
+  "credits": "The Tinkers' Construct team, for the original implementation of oreberries",
   "logoFile": "",
   "screenshots": [],
   "dependencies": []
