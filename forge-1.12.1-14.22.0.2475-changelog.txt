@@ -1,5 +1,63 @@
 Changelog:
-Build 2462:
+Build 2475:
+	mezz: Fix #4386 Race condition when unloading chunks causes dead tile entities
+
+Build 1.12.1-14.22.0.2474:
+	bs2609: Improve generation of normals for vanilla models (#4313)
+	bs2609: Patch block model renderer to use location-aware light value (#4303)
+
+Build 1.12.1-14.22.0.2473:
+	bk1325:
+		Fix CustomModLoadingErrorDisplayScreen not being handled during init or
+		preinit. (#4320)
+	bs2609: Fix light sources rendering wrongly with night vision (MC-58177) (#4365)
+	marvinroesch99: Fire RenderGameOverlayEvent for vignette (#4360)
+
+Build 1.12.1-14.22.0.2472:
+	bs2609: Add missing bounds checks to ItemTextureQuadConverter (#4343)
+	dualspiral: Insert FML handler before Vanilla connection handshake completes (#4380)
+
+Build 1.12.1-14.22.0.2471:
+	williewillus: Fix vanilla map pixel data being used in various places (#4068)
+	bs2609: Adjust float (un)packing functions to be slightly more accurate (#4316)
+	marvinroesch99:
+		Add support instructions to be displayed when creating an issue on
+		Github (#4323)
+	blay09:
+		Allow custom GuiEditArrayEntries without having to recreate the object
+		in several places (#4329)
+
+Build 1.12.1-14.22.0.2470:
+	bs2609:
+		[1.12] Remove patches adding chunkExists() function, switch to vanilla
+		code (#4054)
+
+Build 1.12.1-14.22.0.2469:
+	Tyler Hancock: Added missing MapGen types to the InitMapGenEvent (#4322)
+
+Build 1.12.1-14.22.0.2468:
+	josephcsible:
+		Fix nether wart, pumpkins, and melons passing the new state as the
+		original state to CropGrowEvent.Post (#4377)
+
+Build 1.12.1-14.22.0.2467:
+	Choonster.2010: Fix FieldWrapper.MapWrapper initialising wrong category (#4335)
+
+Build 1.12.1-14.22.0.2466:
+	Choonster.2010:
+		Don't parse category names as regular expressions in
+		FieldWrapper.MapWrapper (#4334)
+
+Build 1.12.1-14.22.0.2465:
+	LexManos: Fix issue saving observers using different metadata then vanilla.
+
+Build 1.12.1-14.22.0.2464:
+	Barteks2x: Fix netty warning spam when sending >1MB packets (#4363)
+
+Build 1.12.1-14.22.0.2463:
+	Barteks2x: Fix FML handshake crash, fixes #4285 and #3974 (#4304)
+
+Build 1.12.1-14.22.0.2462:
 	LexManos: Fix recipe book auto-fill not working for OreDictionary ingredients.
 
 Build 1.12.1-14.22.0.2461:
