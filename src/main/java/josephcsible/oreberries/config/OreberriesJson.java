@@ -48,16 +48,15 @@ public class OreberriesJson {
 		iron.addProperty("color", "#FFC7A3");
 		iron.addProperty("tooltip", "Sweet Irony");
 		iron.addProperty("smeltingResult", Items.IRON_NUGGET.getRegistryName().toString());
-		iron.addProperty("rarity", 6);
 		root.add("Iron", iron);
 
 		JsonObject gold = new JsonObject();
 		gold.addProperty("color", "#FFCC33");
 		gold.addProperty("tooltip", "Pure Luster");
 		gold.addProperty("smeltingResult", Items.GOLD_NUGGET.getRegistryName().toString());
-		gold.addProperty("sizeChance", 6);
 		gold.addProperty("rarity", 9);
 		gold.addProperty("maxHeight", 32);
+		gold.addProperty("sizeChance", 6);
 		root.add("Gold", gold);
 
 		JsonObject copper = new JsonObject();
@@ -90,10 +89,10 @@ public class OreberriesJson {
 		JsonObject aluminumNugget = new JsonObject();
 		aluminumNugget.add("ingotNames", gson.toJsonTree(new String[]{"ingotAluminum", "ingotAluminium"}));
 		aluminum.add("smeltingResult", aluminumNugget);
-		aluminum.addProperty("sizeChance", 14);
 		aluminum.addProperty("rarity", 3);
 		aluminum.addProperty("density", 2);
 		aluminum.addProperty("maxHeight", 60);
+		aluminum.addProperty("sizeChance", 14);
 		root.add("Aluminum", aluminum);
 
 		JsonObject essence = new JsonObject();
@@ -105,10 +104,9 @@ public class OreberriesJson {
 		essence.addProperty("special", "essence");
 		essence.addProperty("growsInLight", true);
 		essence.addProperty("tradeable", false);
-		essence.addProperty("sizeChance", 8);
-		essence.addProperty("rarity", 6);
 		essence.addProperty("preferredHeight", 48);
 		essence.addProperty("maxHeight", 32);
+		essence.addProperty("sizeChance", 8);
 		root.add("Essence", essence);
 
 		return root;

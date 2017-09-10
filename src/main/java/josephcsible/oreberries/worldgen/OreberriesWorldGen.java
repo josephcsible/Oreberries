@@ -57,7 +57,7 @@ public class OreberriesWorldGen implements IWorldGenerator {
 	}
 
 	protected void generateOreBush(Random random, int xChunk, int zChunk, World world, WorldGenOreberryBush bush, int y, int heightLimit, int depthLimit) {
-		if(bush.oreberryConfig.rarity >= 0 && random.nextInt(bush.oreberryConfig.rarity) == 0) {
+		if(bush.oreberryConfig.rarity > 0 && random.nextInt(bush.oreberryConfig.rarity) == 0) {
 			for (int i = 0; i < bush.oreberryConfig.density; i++)
 			{
 				BlockPos pos = findAdequateLocation(world, xChunk + random.nextInt(16), y, zChunk + random.nextInt(16), heightLimit, depthLimit);

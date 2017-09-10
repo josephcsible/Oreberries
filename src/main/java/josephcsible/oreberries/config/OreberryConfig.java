@@ -46,13 +46,12 @@ public class OreberryConfig {
 	public final @Nullable String special;
 	public final boolean growsInLight;
 	public final boolean tradeable;
-	public final int sizeChance;
 	public final int rarity;
 	public final int density;
-
 	public final int minHeight;
 	protected final @Nullable Integer preferredHeight;
 	protected final @Nullable Integer maxHeight;
+	public final int sizeChance;
 
 	static String firstUpper(String s) {
 		if(s.isEmpty()) return "";
@@ -85,7 +84,7 @@ public class OreberryConfig {
 		}
 
 		JsonElement jsonTooltip = json.get("tooltip");
-		if(jsonTooltip == null) {
+		if(jsonTooltip == null || jsonTooltip.isJsonNull()) {
 			tooltip = null;
 		} else {
 			tooltip = jsonTooltip.getAsString();
@@ -114,7 +113,7 @@ public class OreberryConfig {
 		}
 
 		JsonElement jsonSpecial = json.get("special");
-		if(jsonSpecial == null) {
+		if(jsonSpecial == null || jsonSpecial.isJsonNull()) {
 			special = null;
 		} else {
 			special = jsonSpecial.getAsString();
@@ -132,13 +131,6 @@ public class OreberryConfig {
 			tradeable = getDefaultTradeable();
 		} else {
 			tradeable = jsonTradeable.getAsBoolean();
-		}
-
-		JsonElement jsonSizeChance = json.get("sizeChance");
-		if(jsonSizeChance == null) {
-			sizeChance = getDefaultSizeChance();
-		} else {
-			sizeChance = jsonSizeChance.getAsInt();
 		}
 
 		JsonElement jsonRarity = json.get("rarity");
@@ -162,18 +154,25 @@ public class OreberryConfig {
 			minHeight = jsonMinHeight.getAsInt();
 		}
 
+		JsonElement jsonPreferredHeight = json.get("preferredHeight");
+		if(jsonPreferredHeight == null || jsonPreferredHeight.isJsonNull()) {
+			preferredHeight = null;
+		} else {
+			preferredHeight = jsonPreferredHeight.getAsInt();
+		}
+
 		JsonElement jsonMaxHeight = json.get("maxHeight");
-		if(jsonMaxHeight == null) {
+		if(jsonMaxHeight == null || jsonMaxHeight.isJsonNull()) {
 			maxHeight = null;
 		} else {
 			maxHeight = jsonMaxHeight.getAsInt();
 		}
 
-		JsonElement jsonPreferredHeight = json.get("preferredHeight");
-		if(jsonPreferredHeight == null) {
-			preferredHeight = null;
+		JsonElement jsonSizeChance = json.get("sizeChance");
+		if(jsonSizeChance == null) {
+			sizeChance = getDefaultSizeChance();
 		} else {
-			preferredHeight = jsonPreferredHeight.getAsInt();
+			sizeChance = jsonSizeChance.getAsInt();
 		}
 	}
 
@@ -211,12 +210,8 @@ public class OreberryConfig {
 		return true;
 	}
 
-	public int getDefaultSizeChance() {
-		return 12;
-	}
-
 	public int getDefaultRarity() {
-		return -1;
+		return 6;
 	}
 
 	public int getDefaultDensity() {
@@ -237,6 +232,10 @@ public class OreberryConfig {
 	public int getMaxHeight(World world) {
 		if(maxHeight == null) return world.getSeaLevel();
 		return maxHeight;
+	}
+
+	public int getDefaultSizeChance() {
+		return 12;
 	}
 
 	public JsonObject toJson() {
@@ -273,9 +272,6 @@ public class OreberryConfig {
 		if(tradeable != getDefaultTradeable()) {
 			json.addProperty("tradeable", tradeable);
 		}
-		if(sizeChance != getDefaultSizeChance()) {
-			json.addProperty("sizeChance", sizeChance);
-		}
 		if(rarity != getDefaultRarity()) {
 			json.addProperty("rarity", rarity);
 		}
@@ -290,6 +286,9 @@ public class OreberryConfig {
 		}
 		if(maxHeight != null) {
 			json.addProperty("maxHeight", maxHeight);
+		}
+		if(sizeChance != getDefaultSizeChance()) {
+			json.addProperty("sizeChance", sizeChance);
 		}
 
 		return json;
