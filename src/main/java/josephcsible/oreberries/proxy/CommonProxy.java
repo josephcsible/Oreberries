@@ -105,11 +105,11 @@ public class CommonProxy {
 	@SubscribeEvent
 	public static void registerVillagerProfessions(RegistryEvent.Register<VillagerProfession> event) {
 		if(!GeneralConfig.enableVillager) return;
-        VillagerProfession prof = new VillagerProfession(OreberriesMod.MODID + ":tinker",
-        		OreberriesMod.MODID + ":textures/entity/villager/tinker.png",
-                "minecraft:textures/entity/zombie_villager/zombie_villager.png");
-        event.getRegistry().register(prof);
-        (new VillagerCareer(prof, "tinker")).addTrade(1, new VillagerTinkerTrades());
+		VillagerProfession prof = new VillagerProfession(OreberriesMod.MODID + ":tinker",
+				OreberriesMod.MODID + ":textures/entity/villager/tinker.png",
+				"minecraft:textures/entity/zombie_villager/zombie_villager.png");
+		event.getRegistry().register(prof);
+		(new VillagerCareer(prof, "tinker")).addTrade(1, new VillagerTinkerTrades());
 	}
 
 	@SubscribeEvent
@@ -202,12 +202,12 @@ public class CommonProxy {
 		}
 	}
 
-    @SubscribeEvent
-    public void onConfigChangedEvent(OnConfigChangedEvent event)
-    {
-        if (event.getModID().equals(OreberriesMod.MODID))
-        {
-            ConfigManager.sync(OreberriesMod.MODID, Config.Type.INSTANCE);
-        }
-    }
+	@SubscribeEvent
+	public void onConfigChangedEvent(OnConfigChangedEvent event)
+	{
+		if (event.getModID().equals(OreberriesMod.MODID))
+		{
+			ConfigManager.sync(OreberriesMod.MODID, Config.Type.INSTANCE);
+		}
+	}
 }

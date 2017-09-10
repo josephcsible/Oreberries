@@ -37,20 +37,20 @@ public class ItemEssenceBerry extends ItemOreberry {
 
 	@Override
 	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand handIn) {
-        ItemStack itemstack = playerIn.getHeldItem(handIn);
+		ItemStack itemstack = playerIn.getHeldItem(handIn);
 
-        if (!worldIn.isRemote)
-        {
-            worldIn.spawnEntity(new EntityXPOrb(worldIn, playerIn.posX, playerIn.posY + 1, playerIn.posZ, itemRand.nextInt(14) + 6));
-        }
+		if (!worldIn.isRemote)
+		{
+			worldIn.spawnEntity(new EntityXPOrb(worldIn, playerIn.posX, playerIn.posY + 1, playerIn.posZ, itemRand.nextInt(14) + 6));
+		}
 
-        if (!playerIn.capabilities.isCreativeMode)
-        {
-            itemstack.shrink(1);
-        }
+		if (!playerIn.capabilities.isCreativeMode)
+		{
+			itemstack.shrink(1);
+		}
 
-        playerIn.addStat(StatList.getObjectUseStats(this));
-        return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
+		playerIn.addStat(StatList.getObjectUseStats(this));
+		return new ActionResult<>(EnumActionResult.SUCCESS, itemstack);
 	}
 
 	public static boolean isEssence(String special) {

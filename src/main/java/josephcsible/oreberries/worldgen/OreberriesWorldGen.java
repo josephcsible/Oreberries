@@ -70,24 +70,24 @@ public class OreberriesWorldGen implements IWorldGenerator {
 	}
 
 	protected BlockPos findAdequateLocation (World world, int x, int y, int z, int heightLimit, int depthLimit)
-    {
-    	BlockPos pos = new BlockPos(x, y, z);
-        do
-        {
-        	if(world.isAirBlock(pos) && !world.isAirBlock(pos.up()))
-                return pos.up();
-            pos = pos.up();
-        } while (pos.getY() < heightLimit);
+	{
+		BlockPos pos = new BlockPos(x, y, z);
+		do
+		{
+			if(world.isAirBlock(pos) && !world.isAirBlock(pos.up()))
+				return pos.up();
+			pos = pos.up();
+		} while (pos.getY() < heightLimit);
 
-        pos = new BlockPos(x, y, z);
-        do
-        {
-        	if(world.isAirBlock(pos) && !world.isAirBlock(pos.down()))
-                return pos.down();
-            pos = pos.down();
-        } while (pos.getY() > depthLimit);
+		pos = new BlockPos(x, y, z);
+		do
+		{
+			if(world.isAirBlock(pos) && !world.isAirBlock(pos.down()))
+				return pos.down();
+			pos = pos.down();
+		} while (pos.getY() > depthLimit);
 
-        return null;
-    }
+		return null;
+	}
 
 }

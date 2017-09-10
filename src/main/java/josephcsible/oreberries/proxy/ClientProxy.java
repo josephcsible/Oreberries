@@ -46,17 +46,17 @@ public class ClientProxy extends CommonProxy {
 	@Override
 	public void init(FMLInitializationEvent event) {
 		super.init(event);
-    	ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
-    	for(ItemNugget item : nuggets) {
-    		int color = Integer.decode(item.config.color);
-    		itemColors.registerItemColorHandler((stack, tintIndex) -> color, item);
-    	}
-    	BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
-    	for(BlockOreberryBush block : oreberryBushBlocks) {
-    		int color = Integer.decode(block.config.color);
-    		blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> color, block);
-    		itemColors.registerItemColorHandler((stack, tintIndex) -> color, Item.getItemFromBlock(block), block.berries);
-    	}
+		ItemColors itemColors = Minecraft.getMinecraft().getItemColors();
+		for(ItemNugget item : nuggets) {
+			int color = Integer.decode(item.config.color);
+			itemColors.registerItemColorHandler((stack, tintIndex) -> color, item);
+		}
+		BlockColors blockColors = Minecraft.getMinecraft().getBlockColors();
+		for(BlockOreberryBush block : oreberryBushBlocks) {
+			int color = Integer.decode(block.config.color);
+			blockColors.registerBlockColorHandler((state, worldIn, pos, tintIndex) -> color, block);
+			itemColors.registerItemColorHandler((stack, tintIndex) -> color, Item.getItemFromBlock(block), block.berries);
+		}
 	}
 
 	protected static class OreberryBushBlockStateMapper extends StateMapperBase {
@@ -80,21 +80,21 @@ public class ClientProxy extends CommonProxy {
 	protected static final ModelResourceLocation essenceBerryMRL = new ModelResourceLocation(new ResourceLocation(OreberriesMod.MODID, "essence_berry"), "inventory");
 	protected static final ModelResourceLocation essenceBerryBushMRL = new ModelResourceLocation(new ResourceLocation(OreberriesMod.MODID, "essence_berry_bush"), "inventory");
 
-    @SubscribeEvent
-    public static void registerModels(@SuppressWarnings("unused") ModelRegistryEvent event) {
-    	for(ItemNugget item : nuggets) {
-    		ModelLoader.setCustomModelResourceLocation(item, 0, nuggetMRL);
-    	}
-    	for(BlockOreberryBush block : oreberryBushBlocks) {
-    		if(ItemEssenceBerry.isEssence(block.config.special)) {
-    			ModelLoader.setCustomStateMapper(block, OreberryBushBlockStateMapper.ESSENCE_BERRY);
-    			ModelLoader.setCustomModelResourceLocation(block.berries, 0, essenceBerryMRL);
-    			ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, essenceBerryBushMRL);
-    		} else {
-	    		ModelLoader.setCustomStateMapper(block, OreberryBushBlockStateMapper.OREBERRY);
-	    		ModelLoader.setCustomModelResourceLocation(block.berries, 0, oreberryMRL);
-	    		ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, oreberryBushMRL);
-    		}
-    	}
-    }
+	@SubscribeEvent
+	public static void registerModels(@SuppressWarnings("unused") ModelRegistryEvent event) {
+		for(ItemNugget item : nuggets) {
+			ModelLoader.setCustomModelResourceLocation(item, 0, nuggetMRL);
+		}
+		for(BlockOreberryBush block : oreberryBushBlocks) {
+			if(ItemEssenceBerry.isEssence(block.config.special)) {
+				ModelLoader.setCustomStateMapper(block, OreberryBushBlockStateMapper.ESSENCE_BERRY);
+				ModelLoader.setCustomModelResourceLocation(block.berries, 0, essenceBerryMRL);
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, essenceBerryBushMRL);
+			} else {
+				ModelLoader.setCustomStateMapper(block, OreberryBushBlockStateMapper.OREBERRY);
+				ModelLoader.setCustomModelResourceLocation(block.berries, 0, oreberryMRL);
+				ModelLoader.setCustomModelResourceLocation(Item.getItemFromBlock(block), 0, oreberryBushMRL);
+			}
+		}
+	}
 }

@@ -43,10 +43,10 @@ public class ItemOreberry extends Item {
 	}
 
 	@Override
-    @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltips, ITooltipFlag advanced) {
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltips, ITooltipFlag advanced) {
 		if(tooltip != null) tooltips.add(tooltip);
-    }
+	}
 
 	@Override
 	public String getItemStackDisplayName(ItemStack stack) {
