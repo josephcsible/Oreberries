@@ -39,6 +39,7 @@ import josephcsible.oreberries.config.OreberryConfig;
 import josephcsible.oreberries.item.ItemNugget;
 import josephcsible.oreberries.worldgen.OreberriesWorldGen;
 import net.minecraft.block.Block;
+import net.minecraft.block.state.IBlockState;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
@@ -209,5 +210,9 @@ public class CommonProxy {
 		{
 			ConfigManager.sync(OreberriesMod.MODID, Config.Type.INSTANCE);
 		}
+	}
+
+	public boolean isOreberryBushOpaqueCube(@SuppressWarnings("unused") IBlockState state) {
+		return false;
 	}
 }

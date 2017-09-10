@@ -169,7 +169,9 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 
 	@Override
 	public boolean isOpaqueCube(IBlockState state) {
-		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && state.getValue(AGE) >= 2;
+		// TODO resolve the fact that this is called by the server, but the answer depends on whether fancy graphics are on
+		// For now, the answer is always just no on the server
+		return OreberriesMod.proxy.isOreberryBushOpaqueCube(state);
 	}
 
 	@Override

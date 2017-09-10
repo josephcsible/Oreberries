@@ -97,4 +97,9 @@ public class ClientProxy extends CommonProxy {
 			}
 		}
 	}
+
+	@Override
+	public boolean isOreberryBushOpaqueCube(IBlockState state) {
+		return !Minecraft.getMinecraft().gameSettings.fancyGraphics && state.getValue(BlockOreberryBush.AGE) >= 2;
+	}
 }
