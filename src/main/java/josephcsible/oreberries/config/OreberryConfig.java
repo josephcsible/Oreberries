@@ -179,7 +179,7 @@ public class OreberryConfig {
 	@SuppressWarnings("deprecation")
 	public String getDefaultBushName() {
 		// TODO make this client-only and switch it to net.minecraft.client.resources.I18n
-		return net.minecraft.util.text.translation.I18n.translateToLocalFormatted("item.oreberries.oreberry_bush.name", name);
+		return net.minecraft.util.text.translation.I18n.translateToLocalFormatted("tile.oreberries.oreberry_bush.name", name);
 	}
 
 	@SuppressWarnings("deprecation")
