@@ -1,6 +1,6 @@
 [
 {
-  "modid": "Oreberries",
+  "modid": "oreberries",
   "name": "Oreberries",
   "description": "Bring back a configurable version of 1.7.10 Tinkers' Construct oreberries",
   "version": "${version}",

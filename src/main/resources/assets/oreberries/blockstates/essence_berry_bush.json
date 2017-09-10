@@ -1,0 +1,15 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "textures": { "all": "oreberries:blocks/essence_berry_bush" }
+  },
+  "variants": {
+    "inventory": [ { "model": "oreberries:oreberry_bush_stage1" } ],
+    "age": {
+      "0": { "model": "oreberries:oreberry_bush_stage0" },
+      "1": { "model": "oreberries:oreberry_bush_stage1" },
+      "2": { "model": "leaves" },
+      "3": { "model": "leaves", "textures": { "all": "oreberries:blocks/essence_berry_bush_ripe" } }
+    }
+  }
+}
