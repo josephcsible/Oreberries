@@ -112,11 +112,11 @@ public class OreberriesJson {
 		return root;
 	}
 
-	public static JsonElement read(File file) {
-		JsonElement rootElem;
+	public static JsonObject read(File file) {
+		JsonObject rootElem;
 		JsonParser parser = new JsonParser();
 		try(BufferedReader reader = new BufferedReader(new FileReader(file))) {
-			rootElem = parser.parse(reader);
+			rootElem = (JsonObject) parser.parse(reader);
 		} catch (@SuppressWarnings("unused") FileNotFoundException e) {
 			rootElem = getDefaults();
 			needsWrite = true;

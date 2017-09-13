@@ -79,9 +79,9 @@ public class CommonProxy {
 		OreberriesMod.logger = event.getModLog();
 
 		File jsonFile = new File(event.getModConfigurationDirectory(), OreberriesMod.MODID + ".json");
-		JsonElement json = OreberriesJson.read(jsonFile);
+		JsonObject json = OreberriesJson.read(jsonFile);
 
-		for(Map.Entry<String, JsonElement> entry : ((JsonObject) json).entrySet()) {
+		for(Map.Entry<String, JsonElement> entry : json.entrySet()) {
 			String name = entry.getKey();
 			OreberryConfig oreberryConfig = new OreberryConfig(name, (JsonObject) entry.getValue());
 			if(oreberryConfig.smeltingResultNugget != null) {
@@ -91,6 +91,10 @@ public class CommonProxy {
 		}
 
 		if(OreberriesJson.needsWrite || GeneralConfig.rewriteJson) {
+			json = new JsonObject();
+			for(BlockOreberryBush block : oreberryBushBlocks) {
+				json.add(block.config.name, block.config.toJson());
+			}
 			OreberriesJson.write(jsonFile, json);
 		}
 	}
