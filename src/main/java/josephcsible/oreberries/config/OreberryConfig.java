@@ -21,6 +21,7 @@ package josephcsible.oreberries.config;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import javax.annotation.Nullable;
@@ -30,6 +31,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import josephcsible.oreberries.item.ItemNugget;
+import net.minecraft.init.Blocks;
 import net.minecraft.world.World;
 
 public class OreberryConfig {
@@ -52,6 +54,7 @@ public class OreberryConfig {
 	protected final @Nullable Integer preferredHeight;
 	protected final @Nullable Integer maxHeight;
 	public final int sizeChance;
+	public final List<String> replaceBlocks;
 
 	static String firstUpper(String s) {
 		if(s.isEmpty()) return "";
@@ -174,6 +177,13 @@ public class OreberryConfig {
 		} else {
 			sizeChance = jsonSizeChance.getAsInt();
 		}
+
+		JsonElement jsonReplaceBlocks = json.get("replaceBlocks");
+		if(jsonReplaceBlocks == null) {
+			replaceBlocks = getDefaultReplaceBlocks();
+		} else {
+			replaceBlocks = Arrays.asList(gson.fromJson(jsonReplaceBlocks, String[].class));
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -238,6 +248,19 @@ public class OreberryConfig {
 		return 12;
 	}
 
+	private static final List<String> defaultReplaceBlocks = Collections.unmodifiableList(Arrays.asList(
+			Blocks.STONE.getRegistryName().toString(),
+			Blocks.GRASS.getRegistryName().toString(),
+			Blocks.DIRT.getRegistryName().toString(),
+			Blocks.WATER.getRegistryName().toString(),
+			Blocks.SAND.getRegistryName().toString(),
+			Blocks.GRAVEL.getRegistryName().toString(),
+			Blocks.SNOW.getRegistryName().toString()
+	));
+	public List<String> getDefaultReplaceBlocks() {
+		return defaultReplaceBlocks;
+	}
+
 	public JsonObject toJson() {
 		Gson gson = new Gson();
 		JsonObject json = new JsonObject();
@@ -289,6 +312,9 @@ public class OreberryConfig {
 		}
 		if(sizeChance != getDefaultSizeChance()) {
 			json.addProperty("sizeChance", sizeChance);
+		}
+		if(!replaceBlocks.equals(getDefaultReplaceBlocks())) {
+			json.add("replaceBlocks", gson.toJsonTree(replaceBlocks));
 		}
 
 		return json;

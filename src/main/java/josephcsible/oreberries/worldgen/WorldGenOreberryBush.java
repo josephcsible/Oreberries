@@ -19,16 +19,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 
 package josephcsible.oreberries.worldgen;
 
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.Set;
 
 import josephcsible.oreberries.BlockOreberryBush;
+import josephcsible.oreberries.OreberriesMod;
 import josephcsible.oreberries.config.OreberryConfig;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.init.Blocks;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.gen.feature.WorldGenerator;
@@ -37,12 +38,20 @@ public class WorldGenOreberryBush extends WorldGenerator
 {
 	public final OreberryConfig oreberryConfig;
 	private final IBlockState newState;
-	private static final Set<Block> replaceBlocks = new HashSet<>(Arrays.asList(Blocks.STONE, Blocks.GRASS, Blocks.DIRT, Blocks.WATER, Blocks.SAND, Blocks.GRAVEL, Blocks.SNOW));
+	private final Set<Block> replaceBlocks = new HashSet<>();
 
 	public WorldGenOreberryBush(BlockOreberryBush block)
 	{
 		this.newState = block.getDefaultState().withProperty(BlockOreberryBush.AGE, 3);
 		this.oreberryConfig = block.config;
+		for(String blockName : block.config.replaceBlocks) {
+			Block replaceBlock = Block.REGISTRY.getObject(new ResourceLocation(blockName));
+			if(replaceBlock == Blocks.AIR) {
+				OreberriesMod.logger.warn("Oreberry bush {} has unknown replacement block {}", oreberryConfig.name, blockName);
+			} else {
+				replaceBlocks.add(replaceBlock);
+			}
+		}
 	}
 
 	@Override
