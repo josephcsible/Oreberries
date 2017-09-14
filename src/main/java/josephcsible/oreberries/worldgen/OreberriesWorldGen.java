@@ -44,7 +44,7 @@ public class OreberriesWorldGen implements IWorldGenerator {
 	@Override
 	public void generate(Random random, int chunkX, int chunkZ, World world, IChunkGenerator chunkGenerator,
 			IChunkProvider chunkProvider) {
-		if(world.provider.getDimension() == 0 && world.getWorldInfo().getTerrainType() != WorldType.FLAT) {
+		if(world.getWorldInfo().getTerrainType() != WorldType.FLAT) {
 			generateOreBushes(random, chunkX * 16 + 8, chunkZ * 16 + 8, world);
 		}
 	}
@@ -52,7 +52,8 @@ public class OreberriesWorldGen implements IWorldGenerator {
 	protected void generateOreBushes (Random random, int xChunk, int zChunk, World world)
 	{
 		for(WorldGenOreberryBush gen : bushes) {
-			generateOreBush(random, xChunk, zChunk, world, gen, gen.oreberryConfig.getPreferredHeight(world), gen.oreberryConfig.getMaxHeight(world), gen.oreberryConfig.minHeight);
+			if(gen.oreberryConfig.dimensions.contains(world.provider.getDimension()))
+				generateOreBush(random, xChunk, zChunk, world, gen, gen.oreberryConfig.getPreferredHeight(world), gen.oreberryConfig.getMaxHeight(world), gen.oreberryConfig.minHeight);
 		}
 	}
 

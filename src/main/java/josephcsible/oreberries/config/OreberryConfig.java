@@ -55,6 +55,7 @@ public class OreberryConfig {
 	protected final @Nullable Integer maxHeight;
 	public final int sizeChance;
 	public final List<String> replaceBlocks;
+	public final List<Integer> dimensions;
 
 	static String firstUpper(String s) {
 		if(s.isEmpty()) return "";
@@ -184,6 +185,13 @@ public class OreberryConfig {
 		} else {
 			replaceBlocks = Arrays.asList(gson.fromJson(jsonReplaceBlocks, String[].class));
 		}
+
+		JsonElement jsonDimensions = json.get("dimensions");
+		if(jsonDimensions == null) {
+			dimensions = getDefaultDimensions();
+		} else {
+			dimensions = Arrays.asList(gson.fromJson(jsonDimensions, Integer[].class));
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -261,6 +269,11 @@ public class OreberryConfig {
 		return defaultReplaceBlocks;
 	}
 
+	private static final List<Integer> defaultDimensions = Collections.unmodifiableList(Arrays.asList(0));
+	public List<Integer> getDefaultDimensions() {
+		return defaultDimensions;
+	}
+
 	public JsonObject toJson() {
 		Gson gson = new Gson();
 		JsonObject json = new JsonObject();
@@ -315,6 +328,9 @@ public class OreberryConfig {
 		}
 		if(!replaceBlocks.equals(getDefaultReplaceBlocks())) {
 			json.add("replaceBlocks", gson.toJsonTree(replaceBlocks));
+		}
+		if(!dimensions.equals(getDefaultDimensions())) {
+			json.add("dimensions", gson.toJsonTree(dimensions));
 		}
 
 		return json;
