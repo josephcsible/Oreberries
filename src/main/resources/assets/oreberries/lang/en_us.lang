@@ -11,3 +11,5 @@ config.oreberries.enableVillager=Enable Tinker villager
 config.oreberries.enableVillager.tooltip=Whether to enable a Tinker villager who sells oreberry bushes.
 config.oreberries.rewriteJson=Rewrite JSON after read
 config.oreberries.rewriteJson.tooltip=Whether to rewrite the JSON configuration after reading it, to clean and standardize its formatting.
+config.oreberries.silkTouchRequirement=Silk touch requirement
+config.oreberries.silkTouchRequirement.tooltip=The minimum silk touch level required to harvest oreberry bushes. Since only level 1 silk touch is available, setting this to 2 or higher will completely prevent harvesting them.

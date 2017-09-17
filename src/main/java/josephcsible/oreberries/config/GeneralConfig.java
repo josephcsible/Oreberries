@@ -24,6 +24,7 @@ import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.Config.Comment;
 import net.minecraftforge.common.config.Config.LangKey;
 import net.minecraftforge.common.config.Config.RangeDouble;
+import net.minecraftforge.common.config.Config.RangeInt;
 import net.minecraftforge.common.config.Config.RequiresMcRestart;
 
 @Config(modid = OreberriesMod.MODID)
@@ -48,4 +49,9 @@ public class GeneralConfig {
 	@LangKey("config.oreberries.rewriteJson")
 	@Comment("Whether to rewrite the JSON configuration after reading it, to clean and standardize its formatting.")
 	public static boolean rewriteJson = false;
+
+	@RangeInt(min = 0)
+	@LangKey("config.oreberries.silkTouchRequirement")
+	@Comment("The minimum silk touch level required to harvest oreberry bushes. Since only level 1 silk touch is available, setting this to 2 or higher will completely prevent harvesting them.")
+	public static int silkTouchRequirement = 0;
 }
