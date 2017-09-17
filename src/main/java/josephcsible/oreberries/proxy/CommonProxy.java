@@ -208,7 +208,7 @@ public class CommonProxy {
 	}
 
 	@SubscribeEvent
-	public void onConfigChangedEvent(OnConfigChangedEvent event)
+	public static void onConfigChangedEvent(OnConfigChangedEvent event)
 	{
 		if (event.getModID().equals(OreberriesMod.MODID))
 		{
