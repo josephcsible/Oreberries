@@ -287,9 +287,21 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 		if(config.tooltip != null) tooltips.add(config.tooltip);
 	}
 
+	// For requiring a minimum silk touch level. A bit messy since we want to let a required level above 1 be configured.
+
+	@Override
+	public boolean canSilkHarvest() {
+		return true;
+	}
+
 	@Override
 	public boolean canHarvestBlock(IBlockAccess world, BlockPos pos, EntityPlayer player) {
 		return EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) >= GeneralConfig.silkTouchRequirement
 				&& super.canHarvestBlock(world, pos, player);
+	}
+
+	@Override
+	public int quantityDropped(Random random) {
+		return GeneralConfig.silkTouchRequirement == 0 ? super.quantityDropped(random) : 0;
 	}
 }
