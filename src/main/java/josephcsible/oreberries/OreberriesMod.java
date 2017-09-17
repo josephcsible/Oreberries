@@ -40,7 +40,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 public class OreberriesMod
 {
 	public static final String MODID = "oreberries";
-	public static final String VERSION = "0.2.0";
+	public static final String VERSION = "0.3.0";
 
 	public static Logger logger;
 
