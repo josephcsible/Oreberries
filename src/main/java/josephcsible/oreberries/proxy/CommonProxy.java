@@ -53,6 +53,7 @@ import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
+import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 import net.minecraftforge.fml.common.registry.VillagerRegistry.VillagerCareer;
@@ -117,9 +118,15 @@ public class CommonProxy {
 		(new VillagerCareer(prof, "tinker")).addTrade(1, new VillagerTinkerTrades());
 	}
 
-	@SubscribeEvent
+	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void registerItems(RegistryEvent.Register<Item> event) {
 		IForgeRegistry<Item> registry = event.getRegistry();
+		for(ItemNugget item : nuggets) {
+			registry.register(item);
+			for(String oredictName : item.config.oredictNames) {
+				OreDictionary.registerOre(oredictName, item);
+			}
+		}
 		for(BlockOreberryBush block : oreberryBushBlocks) {
 			registry.registerAll(new ItemBlock(block) {
 				@Override
@@ -129,12 +136,6 @@ public class CommonProxy {
 			}.setRegistryName(block.getRegistryName()), block.berries);
 			for(String oredictName : block.config.oredictNames) {
 				OreDictionary.registerOre(oredictName, block.berries);
-			}
-		}
-		for(ItemNugget item : nuggets) {
-			registry.register(item);
-			for(String oredictName : item.config.oredictNames) {
-				OreDictionary.registerOre(oredictName, item);
 			}
 		}
 	}
