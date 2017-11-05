@@ -48,6 +48,7 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraftforge.common.config.Config;
 import net.minecraftforge.common.config.ConfigManager;
 import net.minecraftforge.event.RegistryEvent;
+import net.minecraftforge.event.world.BlockEvent.HarvestDropsEvent;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -219,5 +220,17 @@ public class CommonProxy {
 
 	public boolean isOreberryBushOpaqueCube(@SuppressWarnings("unused") IBlockState state) {
 		return false;
+	}
+
+	@SubscribeEvent
+	public static void onHarvestDrops(HarvestDropsEvent event) {
+		IBlockState state = event.getState();
+		Block block = state.getBlock();
+		if(block instanceof BlockOreberryBush && state.getValue(BlockOreberryBush.AGE) >= 3) {
+			// If a player somehow manages to break a block without harvesting its berries first, drop the berries
+			// along with the bush. This has to be here and not in BlockOreberryBush so that it works if they're silk
+			// touching too.
+			event.getDrops().add(new ItemStack(((BlockOreberryBush)block).berries, event.getWorld().rand.nextInt(3) + 1));
+		}
 	}
 }
