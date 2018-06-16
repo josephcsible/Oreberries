@@ -291,7 +291,7 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 
 	@Override
 	public boolean canSilkHarvest(World world, BlockPos pos, IBlockState state, EntityPlayer player) {
-		return EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) >= GeneralConfig.silkTouchRequirement;
+		return player != null && EnchantmentHelper.getEnchantmentLevel(Enchantments.SILK_TOUCH, player.getHeldItemMainhand()) >= GeneralConfig.silkTouchRequirement;
 	}
 
 	@Override
