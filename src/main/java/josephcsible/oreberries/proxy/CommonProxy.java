@@ -230,7 +230,7 @@ public class CommonProxy {
 			// If a player somehow manages to break a block without harvesting its berries first, drop the berries
 			// along with the bush. This has to be here and not in BlockOreberryBush so that it works if they're silk
 			// touching too.
-			event.getDrops().add(new ItemStack(((BlockOreberryBush)block).berries, event.getWorld().rand.nextInt(3) + 1));
+			event.getDrops().add(((BlockOreberryBush)block).getBerriesStack(event.getWorld().rand));
 		}
 	}
 }

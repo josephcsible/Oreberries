@@ -145,6 +145,10 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 		return harvest(worldIn, pos, state, playerIn);
 	}
 
+	public ItemStack getBerriesStack(Random rand) {
+		return new ItemStack(berries, rand.nextInt(3) + 1);
+	}
+
 	protected boolean harvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
 	{
 		if (state.getValue(AGE) >= 3)
@@ -154,7 +158,7 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 
 			world.setBlockState(pos, state.withProperty(AGE, 2));
 			// TODO 1.7.10 would always drop this rather than give it to a FakePlayer; see if this causes issues
-			ItemHandlerHelper.giveItemToPlayer(player, new ItemStack(berries, world.rand.nextInt(3) + 1));
+			ItemHandlerHelper.giveItemToPlayer(player, getBerriesStack(world.rand));
 		}
 
 		return false;
