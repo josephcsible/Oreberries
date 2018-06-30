@@ -56,6 +56,8 @@ public class OreberryConfig {
 	public final int sizeChance;
 	public final List<String> replaceBlocks;
 	public final List<Integer> dimensions;
+	public final int minDrops;
+	public final int maxDrops;
 
 	static String firstUpper(String s) {
 		if(s.isEmpty()) return "";
@@ -192,6 +194,20 @@ public class OreberryConfig {
 		} else {
 			dimensions = Arrays.asList(gson.fromJson(jsonDimensions, Integer[].class));
 		}
+
+		JsonElement jsonMinDrops = json.get("minDrops");
+		if(jsonMinDrops == null) {
+			minDrops = getDefaultMinDrops();
+		} else {
+			minDrops = jsonMinDrops.getAsInt();
+		}
+
+		JsonElement jsonMaxDrops = json.get("maxDrops");
+		if(jsonMaxDrops == null) {
+			maxDrops = getDefaultMaxDrops();
+		} else {
+			maxDrops = jsonMaxDrops.getAsInt();
+		}
 	}
 
 	@SuppressWarnings("deprecation")
@@ -274,6 +290,14 @@ public class OreberryConfig {
 		return defaultDimensions;
 	}
 
+	public int getDefaultMinDrops() {
+		return 1;
+	}
+
+	public int getDefaultMaxDrops() {
+		return 3;
+	}
+
 	public JsonObject toJson() {
 		Gson gson = new Gson();
 		JsonObject json = new JsonObject();
@@ -331,6 +355,12 @@ public class OreberryConfig {
 		}
 		if(!dimensions.equals(getDefaultDimensions())) {
 			json.add("dimensions", gson.toJsonTree(dimensions));
+		}
+		if(minDrops != getDefaultMinDrops()) {
+			json.addProperty("minDrops", minDrops);
+		}
+		if(maxDrops != getDefaultMaxDrops()) {
+			json.addProperty("maxDrops", maxDrops);
 		}
 
 		return json;

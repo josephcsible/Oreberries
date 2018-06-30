@@ -146,7 +146,7 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 	}
 
 	public ItemStack getBerriesStack(Random rand) {
-		return new ItemStack(berries, rand.nextInt(3) + 1);
+		return new ItemStack(berries, rand.nextInt(config.maxDrops - config.minDrops + 1) + config.minDrops);
 	}
 
 	protected boolean harvest(World world, BlockPos pos, IBlockState state, EntityPlayer player)
