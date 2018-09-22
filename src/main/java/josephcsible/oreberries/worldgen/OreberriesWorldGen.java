@@ -28,6 +28,7 @@ import josephcsible.oreberries.proxy.CommonProxy;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldType;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.IChunkGenerator;
 import net.minecraftforge.fml.common.IWorldGenerator;
@@ -52,7 +53,7 @@ public class OreberriesWorldGen implements IWorldGenerator {
 	protected void generateOreBushes (Random random, int xChunk, int zChunk, World world)
 	{
 		for(WorldGenOreberryBush gen : bushes) {
-			if(gen.oreberryConfig.dimensions.contains(world.provider.getDimension()))
+			if(gen.oreberryConfig.dimensionWhitelist == gen.oreberryConfig.dimensions.contains(world.provider.getDimension()))
 				generateOreBush(random, xChunk, zChunk, world, gen, gen.oreberryConfig.getPreferredHeight(world), gen.oreberryConfig.getMaxHeight(world), gen.oreberryConfig.minHeight);
 		}
 	}
@@ -62,7 +63,7 @@ public class OreberriesWorldGen implements IWorldGenerator {
 			for (int i = 0; i < bush.oreberryConfig.density; i++)
 			{
 				BlockPos pos = findAdequateLocation(world, xChunk + random.nextInt(16), y, zChunk + random.nextInt(16), heightLimit, depthLimit);
-				if (pos != null)
+				if (pos != null && bush.oreberryConfig.biomeWhitelist == bush.oreberryConfig.biomes.contains(Biome.REGISTRY.getNameForObject(world.getBiome(pos)).toString()))
 				{
 					bush.generate(world, random, pos);
 				}

@@ -56,6 +56,9 @@ public class OreberryConfig {
 	public final int sizeChance;
 	public final List<String> replaceBlocks;
 	public final List<Integer> dimensions;
+	public final boolean dimensionWhitelist;
+	public final List<String> biomes;
+	public final boolean biomeWhitelist;
 	public final int minDrops;
 	public final int maxDrops;
 
@@ -195,6 +198,27 @@ public class OreberryConfig {
 			dimensions = Arrays.asList(gson.fromJson(jsonDimensions, Integer[].class));
 		}
 
+		JsonElement jsonDimensionWhitelist = json.get("dimensionWhitelist");
+		if(jsonDimensionWhitelist == null) {
+			dimensionWhitelist = getDefaultDimensionWhitelist();
+		} else {
+			dimensionWhitelist = jsonDimensionWhitelist.getAsBoolean();
+		}
+
+		JsonElement jsonBiomes = json.get("biomes");
+		if(jsonBiomes == null) {
+			biomes = getDefaultBiomes();
+		} else {
+			biomes = Arrays.asList(gson.fromJson(jsonBiomes, String[].class));
+		}
+
+		JsonElement jsonBiomeWhitelist = json.get("biomeWhitelist");
+		if(jsonBiomeWhitelist == null) {
+			biomeWhitelist = getDefaultBiomeWhitelist();
+		} else {
+			biomeWhitelist = jsonBiomeWhitelist.getAsBoolean();
+		}
+
 		JsonElement jsonMinDrops = json.get("minDrops");
 		if(jsonMinDrops == null) {
 			minDrops = getDefaultMinDrops();
@@ -290,6 +314,19 @@ public class OreberryConfig {
 		return defaultDimensions;
 	}
 
+	public boolean getDefaultDimensionWhitelist() {
+		return true;
+	}
+
+	private static final List<String> defaultBiomes = Collections.emptyList();
+	public List<String> getDefaultBiomes() {
+		return defaultBiomes;
+	}
+
+	public boolean getDefaultBiomeWhitelist() {
+		return false;
+	}
+
 	public int getDefaultMinDrops() {
 		return 1;
 	}
@@ -355,6 +392,15 @@ public class OreberryConfig {
 		}
 		if(!dimensions.equals(getDefaultDimensions())) {
 			json.add("dimensions", gson.toJsonTree(dimensions));
+		}
+		if(dimensionWhitelist != getDefaultDimensionWhitelist()) {
+			json.addProperty("dimensionWhitelist", dimensionWhitelist);
+		}
+		if(!biomes.equals(getDefaultBiomes())) {
+			json.add("biomes", gson.toJsonTree(biomes));
+		}
+		if(biomeWhitelist != getDefaultBiomeWhitelist()) {
+			json.addProperty("biomeWhitelist", biomeWhitelist);
 		}
 		if(minDrops != getDefaultMinDrops()) {
 			json.addProperty("minDrops", minDrops);
