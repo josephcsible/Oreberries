@@ -35,9 +35,10 @@ public class GeneralConfig {
 	@Comment("The chance that a random block tick will cause an oreberry bush to advance by one growth state.")
 	public static double tickGrowthChance = 0.05D;
 
+	@RequiresMcRestart
 	@RangeDouble(min = 0.0D, max = 1.0D)
 	@LangKey("config.oreberries.bonemealGrowthChance")
-	@Comment("The chance that an application of bone meal will cause an oreberry bush to advance by one growth state. A value of zero disables the use of bone meal on oreberry bushes.")
+	@Comment("The chance that an application of bone meal will cause an oreberry bush to advance by one growth state. A value of zero disables the use of bone meal on oreberry bushes. Only requires a Minecraft restart if you change it to or from zero.")
 	public static double bonemealGrowthChance = 0.0D;
 
 	@RequiresMcRestart

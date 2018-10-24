@@ -30,7 +30,6 @@ import josephcsible.oreberries.item.ItemEssenceBerry;
 import josephcsible.oreberries.item.ItemOreberry;
 import josephcsible.oreberries.proxy.CommonProxy;
 import net.minecraft.block.Block;
-import net.minecraft.block.IGrowable;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.properties.PropertyInteger;
@@ -61,7 +60,7 @@ import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.ItemHandlerHelper;
 
-public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
+public class BlockOreberryBush extends Block implements IPlantable {
 	public static final PropertyInteger AGE = PropertyInteger.create("age", 0, 3); // small, medium, large, large with berries
 	protected static final AxisAlignedBB[] OREBERRY_BUSH_AABB = new AxisAlignedBB[] {
 			new AxisAlignedBB(0.25D, 0.0D, 0.25D, 0.75D, 0.5D, 0.75D),
@@ -222,7 +221,7 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 	public void updateTick(World worldIn, BlockPos pos, IBlockState state, Random rand)
 	{
 		if(!worldIn.isRemote && ageAndLightOkayToGrow(worldIn, pos, state) && ForgeHooks.onCropsGrowPre(worldIn, pos, state, rand.nextDouble() < GeneralConfig.tickGrowthChance)) {
-			grow(worldIn, rand, pos, state);
+			grow(worldIn, pos, state);
 			ForgeHooks.onCropsGrowPost(worldIn, pos, state, worldIn.getBlockState(pos));
 		}
 	}
@@ -270,18 +269,7 @@ public class BlockOreberryBush extends Block implements IPlantable, IGrowable {
 		return false;
 	}
 
-	@Override
-	public boolean canGrow(World worldIn, BlockPos pos, IBlockState state, boolean isClient) {
-		return GeneralConfig.bonemealGrowthChance > 0.0D && ageAndLightOkayToGrow(worldIn, pos, state);
-	}
-
-	@Override
-	public boolean canUseBonemeal(World worldIn, Random rand, BlockPos pos, IBlockState state) {
-		return rand.nextDouble() < GeneralConfig.bonemealGrowthChance;
-	}
-
-	@Override
-	public void grow(World worldIn, Random rand, BlockPos pos, IBlockState state) {
+	protected void grow(World worldIn, BlockPos pos, IBlockState state) {
 		worldIn.setBlockState(pos, state.withProperty(AGE, state.getValue(AGE) + 1));
 	}
 

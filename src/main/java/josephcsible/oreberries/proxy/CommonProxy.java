@@ -30,6 +30,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
 import josephcsible.oreberries.BlockOreberryBush;
+import josephcsible.oreberries.GrowableBlockOreberryBush;
 import josephcsible.oreberries.OreberriesMod;
 import josephcsible.oreberries.RecipeUtils;
 import josephcsible.oreberries.VillagerTinkerTrades;
@@ -89,7 +90,11 @@ public class CommonProxy {
 			if(oreberryConfig.smeltingResultNugget != null) {
 				nuggets.add(new ItemNugget(name, oreberryConfig.smeltingResultNugget));
 			}
-			oreberryBushBlocks.add(new BlockOreberryBush(name, oreberryConfig));
+			if(GeneralConfig.bonemealGrowthChance > 0.0D) {
+				oreberryBushBlocks.add(new GrowableBlockOreberryBush(name, oreberryConfig));
+			} else {
+				oreberryBushBlocks.add(new BlockOreberryBush(name, oreberryConfig));
+			}
 		}
 
 		if(OreberriesJson.needsWrite || GeneralConfig.rewriteJson) {
