@@ -1,0 +1,15 @@
+tile.oreberries.oreberry_bush.name=%s Erzbeerbusch
+item.oreberries.oreberry.name=%s Erzbeere
+item.oreberries.nugget.name=%s Nugget
+entity.Villager.tinker=Handwerker
+itemGroup.oreberries=Erzbeeren
+config.oreberries.tickGrowthChance=Zufällige Block-Tick-Wachstumschance
+config.oreberries.tickGrowthChance.tooltip=Die Wahrscheinlichkeit, dass ein zufälliger Block-Tick einen Erzbeerbusch um einen Wachstumszustand vorrückt.
+config.oreberries.bonemealGrowthChance=Chance auf Knochenmehlwachstum
+config.oreberries.bonemealGrowthChance.tooltip=Die Möglichkeit, dass eine Anwendung von Knochenmehl dazu führt, dass ein Erdbeerbusch um einen Wachstumszustand vorrückt. Ein Wert von Null deaktiviert die Verwendung von Knochenmehl auf Erdbeersträuchern.
+config.oreberries.enableVillager=Aktiviere Herdwerker Dorfbewohner
+config.oreberries.enableVillager.tooltip=Gibt an, ob ein Handwerker Dorfbewohner, der Erzbeerbüsche verkauft, aktiviert werden soll.
+config.oreberries.rewriteJson=Schreibe die JSON nach dem Lesen neu
+config.oreberries.rewriteJson.tooltip=Gibt an, ob die JSON-Konfiguration nach dem Lesen neu geschrieben werden soll, um die Formatierung zu bereinigen und zu standardisieren.
+config.oreberries.silkTouchRequirement=Behutsamkeit Anforderung
+config.oreberries.silkTouchRequirement.tooltip=Der Mindestgehalt an Behutsamkeit, der für die Ernte von Erzbeerbüschen erforderlich ist. Da nur Behutsamkeit der Stufe 1 verfügbar ist, können diese bei einer Einstellung von 2 oder höher nicht geerntet werden.
