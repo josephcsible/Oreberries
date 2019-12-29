@@ -1,1 +1,45 @@
-<h1>It works!</h1>
+<!DOCTYPE html>
+<html>
+<head>
+<title>Oreberries Color Preview</title>
+<style>
+table, th, td {
+  border: solid;
+}
+span {
+  display: inline-block;
+  line-height: 0;
+}
+img {
+  mix-blend-mode: multiply;
+}
+</style>
+<script>
+function colorChanged() {
+  var c = document.getElementById('color-choice').value;
+  document.getElementById('color-name').innerText = c;
+  Array.from(document.getElementsByClassName('has-bg')).forEach(function(el) {
+    el.style['background-color'] = c;
+  });
+}
+</script>
+</head>
+<body>
+<input type="color" id="color-choice" onchange="colorChanged()">
+<div id="color-name">Choose a color above to see its value and a preview.</div>
+<table>
+<tr>
+  <th>Unripe Bush</th>
+  <th>Ripe Bush</th>
+  <th>Berries</th>
+  <th>Nugget</th>
+</tr>
+<tr>
+  <td><span class="has-bg"><img src="oreberry_bush.png"></span></td>
+  <td><span class="has-bg"><img src="oreberry_bush_ripe.png"></span></td>
+  <td><span class="has-bg"><img src="oreberry.png"></span></td>
+  <td><span class="has-bg"><img src="nugget.png"></span></td>
+</tr>
+</table>
+</body>
+</html>
